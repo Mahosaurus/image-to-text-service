@@ -60,4 +60,4 @@ jobs:
         app-name: 'image-to-text'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_af5be1afea3f4dfabafd412c5b1a4198 }}
-        images: 'artistorage.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_3adb3ff8e23a4c6a9e74b6009c94c353 }}/webimage:latest'
+        images: 'artistorage.azurecr.io/webimage:latest'
