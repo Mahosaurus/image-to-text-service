@@ -8,5 +8,6 @@ Steps to get it running in Azure:
     - E.g. DOCKER_REGISTRY_SERVER_USERNAME
     - E.g. DOCKER_REGISTRY_SERVER_URL
     - E.g. DOCKER_REGISTRY_SERVER_PASSWORD
-    - Port to be exposed is 8080
+    - Port to be exposed is 8000
+    - WEBSITES_PORT=8000
 - In the deployment center: Select admin login for App Service (I think so at least)
