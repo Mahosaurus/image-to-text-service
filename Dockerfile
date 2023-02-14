@@ -1,6 +1,6 @@
 FROM python:3.8-slim-buster
 
-WORKDIR /python-docker
+#WORKDIR /python-docker
 
 RUN echo $(ls .)
 COPY ./requirements.txt .
