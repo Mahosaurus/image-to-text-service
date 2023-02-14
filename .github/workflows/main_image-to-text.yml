@@ -7,7 +7,7 @@ on:
   push:
     branches:
       - main
-      - feature/initial-skeleton
+      - feature/first-app
   workflow_dispatch:
 
 jobs:
@@ -15,31 +15,31 @@ jobs:
     runs-on: 'ubuntu-latest'
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+      uses: docker/setup-buildx-action@v2
 
     - name: Log in to registry
-      uses: docker/login-action@v1
+      uses: docker/login-action@v2
       with:
         registry: https://artistorage.azurecr.io/
         username: ${{ secrets.AzureAppService_ContainerUsername_3adb3ff8e23a4c6a9e74b6009c94c353 }}
         password: ${{ secrets.AzureAppService_ContainerPassword_d0f03beaf61046f09e3a8a7aae8b90dc }}
 
-    - name: Display structure of downloaded files
+    - name: Display structure of copied files
       run: ls -R
       working-directory: .
 
     - name: Build and push container image to registry
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v3
       with:
         push: true
         tags: artistorage.azurecr.io/webimage:${{ github.sha }}
         file: ./Dockerfile
 
     - name: Build and push container image to registry
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v3
       with:
         push: true
         tags: artistorage.azurecr.io/webimage:latest
@@ -60,4 +60,4 @@ jobs:
         app-name: 'image-to-text'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_af5be1afea3f4dfabafd412c5b1a4198 }}
-        images: 'artistorage.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_3adb3ff8e23a4c6a9e74b6009c94c353 }}/webimage:latest'
+        images: 'artistorage.azurecr.io/webimage:latest'
