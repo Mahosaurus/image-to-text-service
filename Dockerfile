@@ -8,8 +8,11 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # Turns off buffering for easier container logging
 ENV PYTHONUNBUFFERED=1
 
-COPY . ./
+COPY api /app
+COPY src /app/src
+COPY requirements.txt .
 
 RUN python -m pip install -r requirements.txt
 
+WORKDIR /app
 CMD ["python3", "app.py"]
