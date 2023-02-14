@@ -2,7 +2,8 @@ FROM python:3.8-slim-buster
 
 #WORKDIR /python-docker
 
-RUN echo $(ls .)
+RUN echo pwd
+RUN echo tree
 COPY ./requirements.txt .
 RUN pip3 install -r requirements.txt
 
