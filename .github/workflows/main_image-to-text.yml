@@ -15,7 +15,7 @@ jobs:
     runs-on: 'ubuntu-latest'
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
@@ -27,7 +27,7 @@ jobs:
         username: ${{ secrets.AzureAppService_ContainerUsername_3adb3ff8e23a4c6a9e74b6009c94c353 }}
         password: ${{ secrets.AzureAppService_ContainerPassword_d0f03beaf61046f09e3a8a7aae8b90dc }}
 
-    - name: Display structure of downloaded files
+    - name: Display structure of copied files
       run: ls -R
       working-directory: .
 
