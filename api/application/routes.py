@@ -4,6 +4,8 @@ from flask import current_app as app
 from flask import request, redirect, flash, url_for, render_template
 from werkzeug.utils import secure_filename
 
+from src.ocr import do_ocr
+
 def allowed_file(filename):
     ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
     return '.' in filename and \
@@ -26,5 +28,6 @@ def upload_file():
             #TODO: Enter the tesseract code.
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('upload_file', name=filename))
+            result = do_ocr(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return result
     return render_template("template.html")
