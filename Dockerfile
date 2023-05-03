@@ -14,6 +14,10 @@ COPY requirements.txt .
 RUN echo $(ls)
 RUN python -m pip install -r requirements.txt
 
+RUN sudo apt-get update -yy
+RUN sudo apt-get install poppler-utils -yy
+RUN sudo apt-get install libleptonica-dev tesseract-ocr libtesseract-dev python3-pil tesseract-ocr-eng tesseract-ocr-deu tesseract-ocr-script-latn -yy
+
 WORKDIR /app
 RUN echo $(ls)
 CMD ["python3", "app.py"]
