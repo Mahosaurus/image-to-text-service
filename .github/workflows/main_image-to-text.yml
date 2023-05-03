@@ -7,7 +7,7 @@ on:
   push:
     branches:
       - main
-      - feature/first-app
+      - feature/*
   workflow_dispatch:
 
 jobs:

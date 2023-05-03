@@ -7,3 +7,7 @@ FROM mcr.microsoft.com/vscode/devcontainers/python:3.9@sha256:29ca94ddf0f254cb36
 COPY .devcontainer/sgre_zscaler_cert* /etc/ssl/certs/
 RUN cat /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/sgre_zscaler_cert.crt > /etc/ssl/certs/ca-certificates.crt; exit 0
 ENV NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+
+RUN sudo apt-get update -yy
+RUN sudo apt-get install poppler-utils -yy
+RUN sudo apt-get install libleptonica-dev tesseract-ocr libtesseract-dev python3-pil tesseract-ocr-eng tesseract-ocr-deu tesseract-ocr-script-latn -yy
