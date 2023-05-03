@@ -11,8 +11,12 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/', methods=['GET', 'POST'])
-def upload_file():
+@app.route('/')
+def index():
+    return render_template('upload.html')
+
+@app.route('/upload_image', methods=['POST'])
+def upload_image():
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -32,9 +36,8 @@ def upload_file():
             image = cv2.imread("tmp") #pylint: disable=no-member
             result = ocr_by_tesseract(image)
             print(result)
-            return render_template("template.html", result={"text": result})
-    else:
-        return render_template("template.html", result={})
+            return render_template("processed.html", processed_data={"text": result})
+        return render_template('processed.html', processed_data={"text": result})
 
 def ocr_by_tesseract(file_contet):
     # Get an indexable document
