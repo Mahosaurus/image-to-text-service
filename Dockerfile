@@ -10,14 +10,14 @@ ENV PYTHONUNBUFFERED=1
 
 COPY api /app
 COPY src /app/src
-COPY requirements.txt .
-RUN echo $(ls)
-RUN python -m pip install -r requirements.txt
+COPY requirements.txt /app/.
+
+WORKDIR /app
 
 RUN sudo apt-get update -yy
 RUN sudo apt-get install poppler-utils -yy
 RUN sudo apt-get install libleptonica-dev tesseract-ocr libtesseract-dev python3-pil tesseract-ocr-eng tesseract-ocr-deu tesseract-ocr-script-latn -yy
 
-WORKDIR /app
-RUN echo $(ls)
+RUN python -m pip install -r requirements.txt
+
 CMD ["python3", "app.py"]
