@@ -1,5 +1,3 @@
-import os
-
 import cv2
 import pytesseract
 
@@ -7,7 +5,7 @@ from flask import current_app as app
 from flask import request, redirect, flash, render_template
 
 def allowed_file(filename):
-    ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+    ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg', 'gif'}
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
@@ -33,19 +31,16 @@ def upload_image():
         if file and allowed_file(file.filename):
             print("Tesseract start")
             file.save("tmp")
+            # Read image
             image = cv2.imread("tmp") #pylint: disable=no-member
+            # OCR
             result = ocr_by_tesseract(image)
-            print(result)
-            return render_template("processed.html", processed_data={"text": result})
-        return render_template('processed.html', processed_data={"text": result})
+            return render_template("processed.html", processed_data=result)
+        return render_template('processed.html', processed_data=result)
 
-def ocr_by_tesseract(file_contet):
+def ocr_by_tesseract(file_content):
     # Get an indexable document
-    result_text = bytes(pytesseract.image_to_string(file_contet, lang='deu'), 'utf-8').decode('utf-8')
-    result_text = result_text.replace("\n", "")
-    result_text = result_text.replace(",", " ")
-    result_text = result_text.replace("-", " ")
-    result_text = result_text.replace("—", " ")
-    result_text = result_text.replace("—", " ")
+    result_text = bytes(pytesseract.image_to_string(file_content, lang='deu'), 'utf-8').decode('utf-8')
     result_text = " ".join([text.lower() for text in result_text.split(" ") if text])
+    result_text = [i for i in result_text.split("\n") if i and not i.startswith((" ", "\n", "\t", "\r"))]
     return result_text

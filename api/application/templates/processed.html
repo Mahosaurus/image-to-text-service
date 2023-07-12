@@ -5,5 +5,10 @@
 </head>
 <body>
 <!-- Display the processed data -->
-<div>{{ processed_data }}</div>
+<div>
+    {% for result in processed_data %}
+    <tr>
+        <td>{{ result }}</td><br>
+    </tr>
+{% endfor %}</div>
 </body>
