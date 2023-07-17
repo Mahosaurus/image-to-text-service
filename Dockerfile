@@ -16,7 +16,7 @@ WORKDIR /app
 
 RUN apt-get update -yy
 RUN apt-get install poppler-utils -yy
-RUN apt-get install libleptonica-dev tesseract-ocr libtesseract-dev python3-pil tesseract-ocr-eng tesseract-ocr-deu tesseract-ocr-script-latn -yy
+RUN apt-get install libleptonica-dev tesseract-ocr libtesseract-dev python3-pil tesseract-ocr-eng tesseract-ocr-deu tesseract-ocr-spa tesseract-ocr-script-latn -yy
 
 RUN python -m pip install -r requirements.txt
 
